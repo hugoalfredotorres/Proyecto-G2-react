@@ -21,7 +21,7 @@ import { AppContext } from "./context/AppContext";
 import usersDefecto from "./constants/users_defaults";
 
 const App = () => {
-  const { doctor } = useContext(AppContext);
+  const { isDoctor, isPaciente, isAdmin } = useContext(AppContext);
   const doctorPath = useLocation().pathname.includes("doctor-dashboard");
 
   useEffect(() => {
@@ -51,18 +51,24 @@ const App = () => {
         {/* Doctor Routes */}
         <Route
           path="/doctor-dashboard"
-          element={doctor ? <Layout /> : <Login />}
+          element={isDoctor ? <Layout /> : <Login />}
         >
-          <Route index element={doctor ? <Dashboard /> : <Login />} />
+          <Route index element={isDoctor ? <Dashboard /> : <Login />} />
           <Route
             path="appointments"
-            element={doctor ? <Appointments /> : <Login />}
+            element={isDoctor ? <Appointments /> : <Login />}
           />
           <Route
             path="my-profile"
-            element={doctor ? <MyProfile /> : <Login />}
+            element={isDoctor ? <MyProfile /> : <Login />}
           />
         </Route>
+
+        {/* Admin Routes */}
+        <Route
+          path="/admin-dashboard"
+          element={isAdmin ? <Layout /> : <Login />} // falta cambiar "Layout" por la vista del administrador
+        />
       </Routes>
       {!doctorPath && <Footer />}
     </div>

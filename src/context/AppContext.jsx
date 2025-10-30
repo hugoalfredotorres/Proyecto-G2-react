@@ -7,7 +7,9 @@ const AppContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
-  const [doctor, setDoctor] = useState(true);
+  const [isDoctor, setIsDoctor] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isPaciente, setIsPaciente] = useState(false);
   const [healthSpecialties, setHealthSpecialties] = useState([]);
   const fetchHealthSpecialties = () => {
     setHealthSpecialties(specialtiesData);
@@ -19,8 +21,12 @@ const AppContextProvider = ({ children }) => {
     navigate,
     user,
     setUser,
-    doctor,
-    setDoctor,
+    isDoctor,
+    setIsDoctor,
+    isAdmin,
+    setIsAdmin,
+    isPaciente,
+    setIsPaciente,
     loading,
     setLoading,
     healthSpecialties,

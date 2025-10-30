@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { navigate,  setUser, loading } =
-    useContext(AppContext);
+  const { navigate, setUser, loading } = useContext(AppContext);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -20,10 +19,23 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    toast.success("Login Successful");
-    setUser(true);
-    navigate("/");
-    console.log(formData);
+    const form = formData;
+    const usersLocal = localStorage.getItem("users");
+    const users = usersLocal ? localStorage.parse(usersLocal) : [];
+    const userFind = users.find((user) => {
+      return user.email.toLowerCase() === form.email.toLowerCase();
+    });
+    if (userFind) {
+      if (userFind.password == form.password) {
+        toast.success("Login Successful");
+        setUser(userFind);
+        navigate("/");
+      } else {
+        toast.error("Contraseña incorrecta.");
+      }
+    } else {
+      toast.error("El usuario ingresado no existe.");
+    }
   };
 
   return (

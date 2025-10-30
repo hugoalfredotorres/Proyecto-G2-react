@@ -11,7 +11,6 @@ import MyAppointments from "./pages/MyAppointments";
 import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
 import Layout from "./pages/doctor/Layout";
 import Dashboard from "./pages/doctor/Dashboard";
 import Appointments from "./pages/doctor/Appointments";
@@ -19,6 +18,7 @@ import MyProfile from "./pages/doctor/MyProfile";
 import { Toaster } from "react-hot-toast";
 import { useContext } from "react";
 import { AppContext } from "./context/AppContext";
+
 const App = () => {
   const { doctor } = useContext(AppContext);
   const doctorPath = useLocation().pathname.includes("doctor-dashboard");

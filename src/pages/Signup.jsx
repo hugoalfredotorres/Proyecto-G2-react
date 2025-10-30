@@ -36,6 +36,7 @@ const Signup = () => {
     if (form.role == "paciente") {
       delete form.specialty;
     }
+    form.id = users.length + 1;
     users.push(form);
     localStorage.setItem("users", JSON.stringify(users));
     toast.success("Fué registrado correctamente, espere a ser aprobado.");

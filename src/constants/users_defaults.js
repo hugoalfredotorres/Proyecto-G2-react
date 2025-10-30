@@ -1,5 +1,6 @@
 const usersDefecto = [
   {
+    id: 1,
     name: "Administrador",
     email: "admin@gmail.com",
     password: "admin123",
@@ -8,6 +9,7 @@ const usersDefecto = [
     accepted: true,
   },
   {
+    id: 2,
     name: "Dr. Hugo",
     email: "hugo_doctor@gmail.com",
     password: "hugo",
@@ -17,6 +19,7 @@ const usersDefecto = [
     accepted: true,
   },
   {
+    id: 3,
     name: "Luciano Tales",
     email: "luciano_tales@gmail.com",
     password: "luciano",

@@ -2,9 +2,9 @@ import { Edit2, Mail, Phone, Save, User, X } from "lucide-react";
 import { useState } from "react";
 const Profile = () => {
   const [profileData, setProfileData] = useState({
-    name: "hugo",
-    email: "hugo@example.com",
-    phone: "+54-388-1234567",
+    name: "",
+    email: "",
+    phone: "",
   });
 
   const [isEditing, setIsEditing] = useState(false);

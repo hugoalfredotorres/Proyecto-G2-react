@@ -16,12 +16,22 @@ import Dashboard from "./pages/doctor/Dashboard";
 import Appointments from "./pages/doctor/Appointments";
 import MyProfile from "./pages/doctor/MyProfile";
 import { Toaster } from "react-hot-toast";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "./context/AppContext";
+import usersDefecto from "./constants/users_defaults";
 
 const App = () => {
   const { doctor } = useContext(AppContext);
   const doctorPath = useLocation().pathname.includes("doctor-dashboard");
+
+  useEffect(() => {
+    const existStorage = localStorage.getItem("users") ? true : false;
+    if (!existStorage) {
+      const users = JSON.stringify(usersDefecto);
+      localStorage.setItem("users", users);
+    }
+  }, []);
+
   return (
     <div>
       <Toaster />

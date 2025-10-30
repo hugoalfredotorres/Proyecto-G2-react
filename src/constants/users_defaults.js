@@ -11,6 +11,7 @@ const usersDefecto = [
     email: "hugo_doctor@gmail.com",
     password: "hugo",
     role: "medico",
+    specialty: 'otorrino',
     accepted: true,
   },
   {

@@ -21,7 +21,7 @@ const Login = () => {
     e.preventDefault();
     const form = formData;
     const usersLocal = localStorage.getItem("users");
-    const users = usersLocal ? localStorage.parse(usersLocal) : [];
+    const users = usersLocal ? JSON.parse(usersLocal) : [];
     const userFind = users.find((user) => {
       return user.email.toLowerCase() === form.email.toLowerCase();
     });

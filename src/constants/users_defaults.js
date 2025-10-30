@@ -4,6 +4,7 @@ const usersDefecto = [
     email: "admin@gmail.com",
     password: "admin123",
     role: "admin",
+    phone: "343534",
     accepted: true,
   },
   {
@@ -11,7 +12,8 @@ const usersDefecto = [
     email: "hugo_doctor@gmail.com",
     password: "hugo",
     role: "doctor",
-    specialty: 'otorrino',
+    specialty: "otorrino",
+    phone: "343534",
     accepted: true,
   },
   {
@@ -19,6 +21,7 @@ const usersDefecto = [
     email: "luciano_tales@gmail.com",
     password: "luciano",
     role: "paciente",
+    phone: "343534",
     accepted: true,
   },
 ];

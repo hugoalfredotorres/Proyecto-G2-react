@@ -27,6 +27,10 @@ const Login = () => {
     });
     if (userFind) {
       if (userFind.password == form.password) {
+        if (!userFind.accepted) {
+          toast.error("Su registro aún no fué aprobado.");
+          return;
+        }
         toast.success(`Bienvenido ${userFind.name}`);
         setUser(userFind);
         if (userFind.role == "admin") {

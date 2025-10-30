@@ -1,6 +1,8 @@
 import { Edit2, Mail, Phone, Save, User, X } from "lucide-react";
 import { useState } from "react";
+import { AppContext } from "../context/AppContext";
 const Profile = () => {
+  const { user } = useContext(AppContext); // falta usar los datos reales del usuario logueado traido por context
   const [profileData, setProfileData] = useState({
     name: "hugo",
     email: "hugo@example.com",
@@ -48,8 +50,6 @@ const Profile = () => {
 
       <div className="max-w-2xl mx-auto p-4 -mt-8">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-
-          
           <div className="bg-gradient-to-r from-primary/5 to-primary/10 p-6 border-b">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -75,7 +75,6 @@ const Profile = () => {
           </div>
         </div>
 
-        
         <div className="p-8">
           <h3 className="text-xl font-semibold text-gray-800 mb-6">
             {" "}

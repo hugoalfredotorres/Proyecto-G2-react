@@ -5,22 +5,25 @@ import { assets } from "../assets/assets.js";
 import { Menu, User, X } from "lucide-react";
 import toast from "react-hot-toast";
 const Navbar = () => {
-  const { navigate, user, setUser } = useContext(AppContext);
+  const { navigate, user, setUser, setIsDoctor, setIsAdmin, setIsPaciente } =
+    useContext(AppContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menus = [
     { name: "Home", link: "/" },
     { name: "Doctores", link: "/doctors" },
     { name: "Servicios", link: "/services" },
-    { name: "Acerca de", link: "/about" },
-    { name: "Contacto", link: "/contact" },
   ];
 
   const handleLogout = () => {
-    toast.success("logout successful.");
+    toast.success(`Hasta pronto ${user.name}`);
     setUser(null);
+    setIsDoctor(false);
+    setIsPaciente(false);
+    setIsAdmin(false);
     navigate("/");
   };
+  
   return (
     <div className="max-w-7xl mx-auto mt-8">
       {/* Desktop Navbar */}

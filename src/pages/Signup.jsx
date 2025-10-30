@@ -1,19 +1,20 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
-import { Lock, MailIcon, PhoneIcon, User2Icon } from "lucide-react";
+import { Lock, MailIcon, PhoneIcon, ShieldUser, User2Icon } from "lucide-react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Signup = () => {
-  const {  loading } =
-    useContext(AppContext);
+  const { loading, navigate } = useContext(AppContext);
 
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
     password: "",
-    roll: "",
+    role: "",
+    specialty: "",
+    accepted: false,
   });
 
   const handleChange = (e) => {
@@ -22,8 +23,23 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    toast.success("Signup Successful");
-    console.log(formData);
+    const form = { ...formData };
+    const usersLocal = localStorage.getItem("users");
+    const users = usersLocal ? JSON.parse(usersLocal) : [];
+    const userExist = users.find((user) => {
+      return user.email.toLowerCase() === form.email.toLowerCase();
+    });
+    if (userExist) {
+      toast.error("El email ya se encuentra registrado.");
+      return;
+    }
+    if (form.role == "paciente") {
+      delete form.specialty;
+    }
+    users.push(form);
+    localStorage.setItem("users", JSON.stringify(users));
+    toast.success("Fué registrado correctamente, espere a ser aprobado.");
+    navigate("/");
   };
 
   return (
@@ -33,7 +49,9 @@ const Signup = () => {
         className="max-w-96 w-full mx-auto  text-center border border-gray-300/60 rounded-2xl px-8 bg-primary"
       >
         <h1 className="text-white text-3xl mt-10 font-medium">Registrarse</h1>
-        <p className="text-white text-sm mt-2">Por favor regístrate para continuar</p>
+        <p className="text-white text-sm mt-2">
+          Por favor regístrate para continuar
+        </p>
         <div className="flex items-center w-full mt-10 bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
           <User2Icon />
           <input
@@ -73,16 +91,33 @@ const Signup = () => {
         <div className="flex items-center w-full mt-4 bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
           <User2Icon />
           <select
-            name="roll"
-            value={formData.roll}
+            name="role"
+            value={formData.role}
             onChange={handleChange}
             className="bg-transparent text-gray-800 placeholder-gray-800 outline-none text-sm w-full h-full"
           >
-            <option value="patient">Paciente</option>
+            <option value="paciente">Paciente</option>
             <option value="doctor">Doctor</option>
           </select>
         </div>
-
+        {formData.role == "doctor" && (
+          <div className="flex items-center w-full mt-4 bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
+            <ShieldUser />
+            <select
+              name="specialty"
+              value={formData.specialty}
+              onChange={handleChange}
+              className="bg-transparent text-gray-800 placeholder-gray-800 outline-none text-sm w-full h-full"
+            >
+              <option value="Hematologia">Hematologia</option>
+              <option value="Neurologia">Neurologia</option>
+              <option value="Oncologia">Oncologia</option>
+              <option value="Pediatria">Pediatria</option>
+              <option value="Neumologia">Neumologia</option>
+              <option value="Cardiologia">Cardiologia</option>
+            </select>
+          </div>
+        )}
         <div className="flex items-center w-full mt-4 bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
           <Lock />
           <input

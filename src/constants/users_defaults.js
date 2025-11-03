@@ -14,7 +14,7 @@ const usersDefecto = [
     email: "hugo_doctor@gmail.com",
     password: "hugo",
     role: "doctor",
-    specialty: "Cardiologia",
+    speciality: "Cardiologia",
     phone: "343534",
     accepted: true,
   },

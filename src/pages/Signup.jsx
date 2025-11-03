@@ -13,7 +13,7 @@ const Signup = () => {
     email: "",
     password: "",
     role: "",
-    specialty: "",
+    speciality: "",
     accepted: false,
   });
 
@@ -34,7 +34,7 @@ const Signup = () => {
       return;
     }
     if (form.role == "paciente") {
-      delete form.specialty;
+      delete form.speciality;
     }
     form.id = users.length + 1;
     users.push(form);

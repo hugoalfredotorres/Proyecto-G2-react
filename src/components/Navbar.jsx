@@ -5,8 +5,17 @@ import { assets } from "../assets/assets.js";
 import { Menu, User, X } from "lucide-react";
 import toast from "react-hot-toast";
 const Navbar = () => {
-  const { navigate, user, setUser, setIsDoctor, setIsAdmin, setIsPaciente } =
-    useContext(AppContext);
+  const {
+    navigate,
+    user,
+    setUser,
+    isDoctor,
+    isAdmin,
+    isPaciente,
+    setIsDoctor,
+    setIsAdmin,
+    setIsPaciente,
+  } = useContext(AppContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menus = [
@@ -23,7 +32,7 @@ const Navbar = () => {
     setIsAdmin(false);
     navigate("/");
   };
-  
+
   return (
     <div className="max-w-7xl mx-auto mt-8">
       {/* Desktop Navbar */}
@@ -65,13 +74,21 @@ const Navbar = () => {
                   >
                     Perfil
                   </li>
-
-                  <li
-                    onClick={() => navigate("/my-appointments")}
-                    className="px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
-                  >
-                    Mis Turnos
-                  </li>
+                  {!isAdmin ? (
+                    <li
+                      onClick={() => navigate("/my-appointments")}
+                      className="px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
+                    >
+                      Mis Turnos
+                    </li>
+                  ) : (
+                    <li
+                      onClick={() => navigate("/admin-dashboard")}
+                      className="px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
+                    >
+                      Ver usuarios
+                    </li>
+                  )}
                   <li
                     onClick={handleLogout}
                     className="px-4 py-2 hover:bg-gray-100 rounded cursor-pointer text-red-500"

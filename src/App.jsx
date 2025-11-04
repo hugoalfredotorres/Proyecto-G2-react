@@ -19,6 +19,7 @@ import { Toaster } from "react-hot-toast";
 import { useContext, useEffect } from "react";
 import { AppContext } from "./context/AppContext";
 import usersDefecto from "./constants/users_defaults";
+import DashAdmin from "./pages/dash_admin/dash_admin";
 
 const App = () => {
   const { isDoctor, isPaciente, isAdmin } = useContext(AppContext);
@@ -67,7 +68,7 @@ const App = () => {
         {/* Admin Routes */}
         <Route
           path="/admin-dashboard"
-          element={isAdmin ? <Layout /> : <Login />} // falta cambiar "Layout" por la vista del administrador
+          element={isAdmin ? <DashAdmin /> : <Login />} // falta cambiar "Layout" por la vista del administrador
         />
       </Routes>
       {!doctorPath && <Footer />}

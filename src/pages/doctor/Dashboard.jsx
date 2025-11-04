@@ -1,45 +1,45 @@
-import { Grid2X2 } from "lucide-react";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
 
 const Dashboard = () => {
-  const Data = [
-    {
-      title: "Total Appointments",
-      value: 10,
-      icon: Grid2X2,
-    },
-  ];
-  return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">
-          Dashboard Overview
-        </h1>
-        <p className="text-gray-600">Welcome back!</p>
-      </div>
+  const { appointments, updateAppointmentStatus } = useContext(AppContext);
 
-      {/* Simple Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {Data.map((item, index) => {
-          const Icon = item.icon;
-          return (
-            <div
-              key={index}
-              className="bg-white rounded-lg border border-gray-200 p-6"
-            >
-              <div className="flex items-center space-x-3">
-                <Icon size={24} className="text-gray-500" />
-                <div className="flex items-center justify-center space-x-2 mt-2">
-                  <p className="text-sm text-gray-600">{item.title}</p>
-                  <h3 className="text-2xl font-bold text-gray-900">
-                    {item.value}
-                  </h3>
-                </div>
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Panel del Médico</h1>
+
+      {appointments.length === 0 ? (
+        <p>No hay turnos pendientes.</p>
+      ) : (
+        <ul className="space-y-4">
+          {appointments.map((a) => (
+            <li key={a.id} className="border p-4 rounded shadow">
+              <p><strong>Paciente:</strong> (pendiente agregar nombre)</p>
+              <p><strong>Especialidad:</strong> {a.specialty}</p>
+              <p><strong>Fecha:</strong> {a.date}</p>
+              <p><strong>Hora:</strong> {a.time}</p>
+              <p><strong>Estado:</strong> {a.status}</p>
+
+              <div className="mt-2 space-x-2">
+                <button
+                  onClick={() => updateAppointmentStatus(a.id, "Aprobado")}
+                  className="bg-green-600 text-white px-3 py-1 rounded"
+                >
+                  Aprobar
+                </button>
+                <button
+                  onClick={() => updateAppointmentStatus(a.id, "Rechazado")}
+                  className="bg-red-600 text-white px-3 py-1 rounded"
+                >
+                  Rechazar
+                </button>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
+
 export default Dashboard;

@@ -105,7 +105,7 @@ const Signup = () => {
           <div className="flex items-center w-full mt-4 bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
             <ShieldUser />
             <select
-              name="specialty"
+              name="speciality"
               value={formData.specialty}
               onChange={handleChange}
               className="bg-transparent text-gray-800 placeholder-gray-800 outline-none text-sm w-full h-full"

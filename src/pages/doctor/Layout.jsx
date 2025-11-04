@@ -5,7 +5,7 @@ import { Grid3X3, LayoutDashboard, Menu, User2Icon, X } from "lucide-react";
 import toast from "react-hot-toast";
 
 const Layout = () => {
-  const { setDoctor, navigate } = useContext(AppContext);
+  const { setIsDoctor, navigate } = useContext(AppContext);
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -36,7 +36,7 @@ const Layout = () => {
     return location.pathname === path;
   };
   const logout = async () => {
-    setDoctor(false);
+    setIsDoctor(false);
     toast.success("Logged out successfully");
     navigate("/");
   };

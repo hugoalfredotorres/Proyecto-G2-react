@@ -17,6 +17,25 @@ const AppContextProvider = ({ children }) => {
   useEffect(() => {
     fetchHealthSpecialties();
   }, []);
+  //  Turnos compartidos
+  const [appointments, setAppointments] = useState([]);
+
+  // Cargar especialidades
+  useEffect(() => {
+    setHealthSpecialties(specialtiesData);
+  }, []);
+
+  //  Función para agregar turnos
+  const addAppointment = (newAppointment) => {
+    setAppointments((prev) => [...prev, newAppointment]);
+  };
+
+  //  Función para que el médico pueda actualizar un turno
+  const updateAppointmentStatus = (id, newStatus) => {
+    setAppointments((prev) =>
+      prev.map((a) => (a.id === id ? { ...a, status: newStatus } : a))
+    );
+  };
   const value = {
     navigate,
     user,
@@ -30,6 +49,9 @@ const AppContextProvider = ({ children }) => {
     loading,
     setLoading,
     healthSpecialties,
+    addAppointment,
+    appointments,
+    updateAppointmentStatus,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

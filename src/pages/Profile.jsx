@@ -4,9 +4,9 @@ import { AppContext } from "../context/AppContext";
 const Profile = () => {
   const { user } = useContext(AppContext); // falta usar los datos reales del usuario logueado traido por context
   const [profileData, setProfileData] = useState({
-    name: "hugo",
-    email: "hugo@example.com",
-    phone: "+54-388-1234567",
+    name: "",
+    email: "",
+    phone: "",
   });
 
   const [isEditing, setIsEditing] = useState(false);

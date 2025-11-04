@@ -12,7 +12,7 @@ const Signup = () => {
     phone: "",
     email: "",
     password: "",
-    role: "",
+    role: "paciente",
     speciality: "",
     accepted: false,
   });
@@ -97,7 +97,7 @@ const Signup = () => {
             onChange={handleChange}
             className="bg-transparent text-gray-800 placeholder-gray-800 outline-none text-sm w-full h-full"
           >
-            <option value="paciente">Paciente</option>
+            <option selected value="paciente">Paciente</option>
             <option value="doctor">Doctor</option>
           </select>
         </div>

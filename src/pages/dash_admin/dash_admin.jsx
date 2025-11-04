@@ -23,7 +23,7 @@ const DashAdmin = () => {
     usuariosCopia[indice].accepted = true;
     localStorage.setItem("users", JSON.stringify(usuariosCopia));
     toast.success(`Usuario ${usuariosCopia[indice].name} aprobado.`);
-    setUsers([...usuariosCopia]);
+    setUsuarios(usuariosCopia);
   };
 
   return (

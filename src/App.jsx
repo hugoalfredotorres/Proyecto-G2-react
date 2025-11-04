@@ -22,8 +22,24 @@ import usersDefecto from "./constants/users_defaults";
 import DashAdmin from "./pages/dash_admin/dash_admin";
 
 const App = () => {
-  const { isDoctor, isPaciente, isAdmin } = useContext(AppContext);
+  const { isDoctor, isPaciente, isAdmin ,setUser,setIsDoctor, setIsPaciente, setIsAdmin } = useContext(AppContext);
   const doctorPath = useLocation().pathname.includes("doctor-dashboard");
+
+  const verificarUsuarioLogueado = ()=>{
+    const usuarioStorage = localStorage.getItem("usuario-logueado")
+    const usuario = JSON.parse(usuarioStorage)
+    setUser(usuario);
+        if (usuario.role == "admin") {
+          setIsAdmin(true);
+          navigate("/admin-dashboard");
+        } else if (usuario.role == "doctor") {
+          setIsDoctor(true);
+          navigate("/doctor-dashboard");
+        } else {
+          setIsPaciente(true);
+          navigate("/");
+        }
+  }
 
   useEffect(() => {
     const existStorage = localStorage.getItem("users") ? true : false;
@@ -31,6 +47,7 @@ const App = () => {
       const users = JSON.stringify(usersDefecto);
       localStorage.setItem("users", users);
     }
+    verificarUsuarioLogueado()
   }, []);
 
   return (

@@ -33,6 +33,7 @@ const Login = () => {
         }
         toast.success(`Bienvenido ${userFind.name}`);
         setUser(userFind);
+        localStorage.setItem("usuario-logueado",JSON.stringify(userFind))
         if (userFind.role == "admin") {
           setIsAdmin(true);
           navigate("/admin-dashboard");

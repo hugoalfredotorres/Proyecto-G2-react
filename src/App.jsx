@@ -23,6 +23,7 @@ import DashAdmin from "./pages/dash_admin/dash_admin";
 
 const App = () => {
   const {
+    navigate,
     isDoctor,
     isPaciente,
     isAdmin,

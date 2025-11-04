@@ -1,242 +1,141 @@
-import { Calendar, Clock, Mail, MapPin, Phone, User } from "lucide-react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AppContext } from "../context/AppContext";
+
 const MyAppointments = () => {
-  // Dummy appointment data
-  const [appointments] = useState([
-    {
-      id: 1,
-      doctorName: "Dr. Sarah Ahmed",
-      specialty: "Cardiologist",
-      date: "2024-10-15",
-      time: "10:00 AM",
-      status: "confirmed",
-      patientName: "John Doe",
-      phone: "+92-300-1234567",
-      email: "john.doe@example.com",
-      location: "City Hospital, Karachi",
-      fees: 0,
-      paymentMethod: "online",
-      symptoms: "Chest pain and irregular heartbeat",
-      doctorImage:
-        "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
-    },
-    {
-      id: 2,
-      doctorName: "Dr. Ahmad Khan",
-      specialty: "Neurologist",
-      date: "2024-10-18",
-      time: "02:30 PM",
-      status: "pending",
-      patientName: "Jane Smith",
-      phone: "+92-321-9876543",
-      email: "jane.smith@example.com",
-      location: "Medical Center, Lahore",
-      fees: 0,
-      paymentMethod: "clinic",
-      symptoms: "Severe headaches and dizziness",
-      doctorImage:
-        "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150&h=150&fit=crop&crop=face",
-    },
-    {
-      id: 3,
-      doctorName: "Dr. Fatima Ali",
-      specialty: "Dermatologist",
-      date: "2024-10-20",
-      time: "11:15 AM",
-      status: "cancelled",
-      patientName: "Mike Johnson",
-      phone: "+92-333-5555444",
-      email: "mike.johnson@example.com",
-      location: "Skin Care Clinic, Islamabad",
-      fees:0,
-      paymentMethod: "clinic",
-      symptoms: "Skin rash and allergic reaction",
-      doctorImage:
-        "https://images.unsplash.com/photo-1594824475108-41e4550ae1d0?w=150&h=150&fit=crop&crop=face",
-    },
-  ]);
+  const { appointments, addAppointment } = useContext(AppContext);
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+  const [form, setForm] = useState({
+    doctorName: "",
+    specialty: "",
+    date: "",
+    time: "",
+    symptoms: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newAppointment = {
+      id: Date.now(),
+      ...form,
+      patientName: "Leandro Esper", // podrías usar user.name si lo tienen
+      status: "pendiente",
+    };
+
+    addAppointment(newAppointment);
+
+    setForm({
+      doctorName: "",
+      specialty: "",
+      date: "",
+      time: "",
+      symptoms: "",
+    });
+
+    alert("Turno solicitado correctamente ✅");
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-primary text-white py-16">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 rounded-full mb-4">
-            <Calendar className="w-10 h-10 text-white" />
+    <div className="p-6 max-w-3xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6">Solicitar Turno</h1>
+
+      {/* FORMULARIO */}
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow space-y-4">
+        <div>
+          <label className="block font-semibold mb-1">Doctor</label>
+          <input
+            name="doctorName"
+            value={form.doctorName}
+            onChange={handleChange}
+            placeholder="Ej: Dr. Sarah Ahmed"
+            required
+            className="w-full border p-2 rounded"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-1">Especialidad</label>
+          <input
+            name="specialty"
+            value={form.specialty}
+            onChange={handleChange}
+            placeholder="Ej: Cardiología"
+            required
+            className="w-full border p-2 rounded"
+          />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block font-semibold mb-1">Fecha</label>
+            <input
+              type="date"
+              name="date"
+              value={form.date}
+              onChange={handleChange}
+              required
+              className="w-full border p-2 rounded"
+            />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Mis Turnos.
-          </h1>
-          <p className="text-xl text-white/90">
-            Ver y gestionar tus consultas médicas programadas
-          </p>
+          <div>
+            <label className="block font-semibold mb-1">Hora</label>
+            <input
+              type="time"
+              name="time"
+              value={form.time}
+              onChange={handleChange}
+              required
+              className="w-full border p-2 rounded"
+            />
+          </div>
         </div>
-      </div>
 
-      {/* Appointments List */}
-      <div className="max-w-6xl mx-auto px-4 pb-16">
-        <div className="space-y-6">
-          {appointments.map((appointment) => (
-            <div
-              key={appointment.id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden"
-            >
-              {/* Header */}
-              <div className="bg-gradient-to-r from-primary/5 to-primary/10 p-4 border-b">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={appointment.doctorImage}
-                      alt={appointment.doctorName}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-primary/20"
-                    />
-                    <div>
-                      <h3 className="text-lg font-bold text-gray-800">
-                        {appointment.doctorName}
-                      </h3>
-                      <p className="text-primary font-medium">
-                        {appointment.specialty}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="px-3 py-1 rounded-full border text-sm font-medium flex items-center gap-2">
-                    {appointment.status.charAt(0).toUpperCase() +
-                      appointment.status.slice(1)}
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-
-              <div className="p-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* Left Column - Appointment Details */}
-                  <div className="space-y-4">
-                    <h4 className="text-lg font-semibold text-gray-800 mb-3">
-                      Detalles de mis Turnos
-                    </h4>
-
-                    <div className="flex items-center gap-3">
-                      <Calendar className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="font-medium text-gray-800">
-                          {formatDate(appointment.date)}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          Fecha de mis Turnos
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <Clock className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="font-medium text-gray-800">
-                          {appointment.time}
-                        </p>
-                        <p className="text-sm text-gray-600">Hora</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <MapPin className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="font-medium text-gray-800">
-                          {appointment.location}
-                        </p>
-                        <p className="text-sm text-gray-600">Lugar</p>
-                      </div>
-                    </div>
-
-                    <div className="bg-primary/5 rounded-lg p-3">
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-700 font-medium">
-                          {" "}
-                          Consultation Fee:
-                        </span>
-                        <span className="text-xl font-bold text-primary">
-                          $ {appointment.fees}
-                        </span>
-                      </div>
-
-                      <p className="text-sm text-gray-600 mt-1">
-                        Payment:
-                        {appointment.paymentMethod === "clinic"
-                          ? "Pay At Clinie"
-                          : "Online"}
-                      </p>
-                    </div>
-                  </div>
-                  {/* Right Column - patient Details */}
-                  <div className="space-y-4">
-                    <h4 className="text-lg font-semibold text-gray-800 mb-3">
-                      Informacion del paciente
-                    </h4>
-
-                    <div className="flex items-center gap-3">
-                      <User className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="font-medium text-gray-800">
-                          {appointment.patientName}
-                        </p>
-                        <p className="text-sm text-gray-600">Nombre Paciente</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-5 h-5 text-primary" />
-                      <div>
-                        <a
-                          href={`tel:${appointment.phone}`}
-                          className="font-medium text-primary hover:underline"
-                        >
-                          {appointment.phone}
-                        </a>
-                        <p className="text-sm text-gray-600">Nro de Celular</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <Mail className="w-5 h-5 text-primary" />
-                      <div>
-                        <a
-                          href={`mailto:${appointment.email}`}
-                          className="font-medium text-primary hover:underline"
-                        >
-                          {appointment.email}
-                        </a>
-                        <p className="text-sm text-gray-600">Email </p>
-                      </div>
-                    </div>
-
-                    {appointment.symptoms && (
-                      <div className="bg-gray-50 rounded-lg p-3">
-                        <p className="text-sm font-medium text-gray-700 mb-1">
-                          Sintoma:
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          {appointment.symptoms}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div>
+          <label className="block font-semibold mb-1">Síntomas</label>
+          <textarea
+            name="symptoms"
+            value={form.symptoms}
+            onChange={handleChange}
+            placeholder="Describe tus síntomas..."
+            className="w-full border p-2 rounded"
+          />
         </div>
-      </div>
-    </div>
+
+        <button
+          type="submit"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+        >
+          Solicitar Turno
+        </button>
+      </form>
+
+      {/* LISTA DE TURNOS */}
+<div className="mt-8">
+  <h2 className="text-xl font-semibold mb-4">Mis Turnos</h2>
+
+  {!appointments || appointments.length === 0 ? (
+    <p>No hay turnos aún.</p>
+  ) : (
+    <ul className="space-y-4">
+      {appointments.map((a) => (
+        <li key={a.id} className="border p-4 rounded shadow">
+          <p><strong>Doctor:</strong> {a.doctorName}</p>
+          <p><strong>Especialidad:</strong> {a.specialty}</p>
+          <p><strong>Fecha:</strong> {a.date}</p>
+          <p><strong>Hora:</strong> {a.time}</p>
+          <p><strong>Estado:</strong> {a.status}</p>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+   </div>
   );
 };
+
 export default MyAppointments;
+

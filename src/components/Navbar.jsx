@@ -30,6 +30,7 @@ const Navbar = () => {
     setIsDoctor(false);
     setIsPaciente(false);
     setIsAdmin(false);
+    localStorage.removeItem("usuario-logueado");
     navigate("/");
   };
 

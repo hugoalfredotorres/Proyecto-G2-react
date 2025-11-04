@@ -1,8 +1,18 @@
+.titulo {
+  font-size: 2rem;
+  font-weight: semibold;
+  text-align: center;
+}
+
+.mensaje {
+  text-align: center;
+}
+
 .contenedor {
   min-height: 20rem;
   width: 100%;
   background-color: white;
-  padding: 3rem;
+  padding: 1rem 3rem 3rem 3rem;
 }
 
 .contenedor-usuarios {

@@ -28,8 +28,8 @@ const DashAdmin = () => {
 
   return (
     <div className="contenedor">
-      <h2>Usuarios registrados</h2>
-      <span>Para aprobar usuarios hacer click en uno</span>
+      <h2 className="titulo">Usuarios registrados</h2>
+      <h5 className="mensaje">Para aprobar usuarios hacer click en uno</h5>
       <div className="contenedor-usuarios">
         {usuarios.map(
           (usuario) =>

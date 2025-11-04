@@ -37,6 +37,7 @@ const Layout = () => {
   };
   const logout = async () => {
     setIsDoctor(false);
+    localStorage.removeItem("usuario-logueado");
     toast.success("Logged out successfully");
     navigate("/");
   };

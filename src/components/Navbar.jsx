@@ -19,7 +19,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menus = [
-    { name: "Home", link: "/" },
+    { name: "Inicio", link: "/" },
     { name: "Doctores", link: "/doctors" },
     { name: "Servicios", link: "/services" },
   ];
@@ -69,12 +69,6 @@ const Navbar = () => {
                    z-50 inline-block"
               >
                 <ul className="flex flex-col p-2 text-gray-700">
-                  <li
-                    onClick={() => navigate("/profile")}
-                    className="px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
-                  >
-                    Perfil
-                  </li>
                   {!isAdmin ? (
                     <li
                       onClick={() => navigate("/my-appointments")}

@@ -75,7 +75,6 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/my-appointments" element={<MyAppointments />} />
-        <Route path="/profile" element={<Profile />} />
 
         {/* Doctor Routes */}
         <Route
@@ -87,16 +86,12 @@ const App = () => {
             path="appointments"
             element={isDoctor ? <Appointments /> : <Login />}
           />
-          <Route
-            path="my-profile"
-            element={isDoctor ? <MyProfile /> : <Login />}
-          />
         </Route>
 
         {/* Admin Routes */}
         <Route
           path="/admin-dashboard"
-          element={isAdmin ? <DashAdmin /> : <Login />} // falta cambiar "Layout" por la vista del administrador
+          element={isAdmin ? <DashAdmin /> : <Login />}
         />
       </Routes>
       {!doctorPath && <Footer />}

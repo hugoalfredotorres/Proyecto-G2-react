@@ -21,12 +21,6 @@ const Layout = () => {
       name: "Appointments",
       icon: Grid3X3,
     },
-
-    {
-      path: "/doctor-dashboard/my-profile",
-      name: "Profile",
-      icon: User2Icon,
-    },
   ];
 
   const isActive = (path, exact = false) => {

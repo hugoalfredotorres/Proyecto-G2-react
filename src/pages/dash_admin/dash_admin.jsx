@@ -8,7 +8,7 @@ const DashAdmin = () => {
   const [usuarios, setUsuarios] = useState([]);
 
   useEffect(() => {
-    const usuariosStorage = localStorage.getItem("users");
+    const usuariosStorage = localStorage.getItem("usuarios");
     const usuariosParse = JSON.parse(usuariosStorage);
     setUsuarios(usuariosParse);
   }, []);
@@ -21,7 +21,7 @@ const DashAdmin = () => {
     const usuariosCopia = [...usuarios];
     const indice = usuariosCopia.findIndex((copia) => copia.id == usuario.id);
     usuariosCopia[indice].accepted = true;
-    localStorage.setItem("users", JSON.stringify(usuariosCopia));
+    localStorage.setItem("usuarios", JSON.stringify(usuariosCopia));
     toast.success(`Usuario ${usuariosCopia[indice].name} aprobado.`);
     setUsuarios(usuariosCopia);
   };

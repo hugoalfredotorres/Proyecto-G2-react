@@ -13,7 +13,7 @@ const Turnos = () => {
       const turnos = JSON.parse(turnosStorage);
       setTurnos(turnos);
     }
-    const usuariosStorage = localStorage.getItem("users");
+    const usuariosStorage = localStorage.getItem("usuarios");
     if (usuariosStorage) {
       const usuarios = JSON.parse(usuariosStorage);
       const doctores = usuarios.filter(
@@ -153,10 +153,22 @@ const Turnos = () => {
                   <strong>Hora:</strong> {turno.hora}
                 </p>
                 <p>
-                  <strong>Estado:</strong> {turno.estado}
+                  <strong>Estado:</strong>{" "}
+                  <span
+                    className={
+                      turno.estado == "pendiente"
+                        ? "text-yellow-700"
+                        : turno.estado == "aprobado"
+                        ? "text-green-500"
+                        : "text-red-500"
+                    }
+                  >
+                    {turno.estado}
+                  </span>
                 </p>
                 <p>
-                  <strong>Síntomas:</strong> {turno.sintomas}
+                  <strong>Síntomas:</strong>{" "}
+                  {turno.sintomas || "(Sin declarar)"}
                 </p>
               </li>
             ))}

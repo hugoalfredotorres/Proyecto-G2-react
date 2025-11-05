@@ -12,9 +12,10 @@ import Dashboard from "./pages/doctor/Dashboard";
 import { Toaster } from "react-hot-toast";
 import { useContext, useEffect } from "react";
 import { AppContext } from "./context/AppContext";
-import usersDefecto from "./constants/users_defaults";
 import DashAdmin from "./pages/dash_admin/dash_admin";
 import Turnos from "./pages/turnos";
+import usuariosDefecto from "./constants/usuarios_defecto";
+import turnosDefecto from "./constants/turnos_defecto";
 
 const App = () => {
   const {
@@ -46,12 +47,23 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-    const existStorage = localStorage.getItem("users") ? true : false;
-    if (!existStorage) {
-      const users = JSON.stringify(usersDefecto);
-      localStorage.setItem("users", users);
+  const agregarDatosPorDefecto = () => {
+    const existeUsuariosStorage = localStorage.getItem("usuarios")
+      ? true
+      : false;
+    if (!existeUsuariosStorage) {
+      const usuarios = JSON.stringify(usuariosDefecto);
+      localStorage.setItem("usuarios", usuarios);
     }
+    const existeTurnosStorage = localStorage.getItem("turnos") ? true : false;
+    if (!existeTurnosStorage) {
+      const turnos = JSON.stringify(turnosDefecto);
+      localStorage.setItem("turnos", turnos);
+    }
+  };
+
+  useEffect(() => {
+    agregarDatosPorDefecto();
     verificarUsuarioLogueado();
   }, []);
 

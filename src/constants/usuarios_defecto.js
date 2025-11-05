@@ -1,0 +1,83 @@
+const usuariosDefecto = [
+  //** administrador */
+  {
+    id: 1,
+    name: "Administrador",
+    email: "admin@gmail.com",
+    password: "admin123",
+    role: "admin",
+    phone: "343534",
+    accepted: true,
+  },
+  //** doctores */
+  {
+    id: 2,
+    name: "Dr. Hugo",
+    email: "hugo_doctor@gmail.com",
+    password: "hugo",
+    role: "doctor",
+    speciality: "Cardiologia",
+    phone: "343534",
+    accepted: true,
+  },
+  {
+    id: 3,
+    name: "Dra. María",
+    email: "maria@gmail.com",
+    password: "maria",
+    role: "doctor",
+    speciality: "Pediatria",
+    phone: "3435434",
+    accepted: true,
+  },
+  {
+    id: 4,
+    name: "Dr. José",
+    email: "jose_doctor@gmail.com",
+    password: "jose",
+    role: "doctor",
+    speciality: "Neurologia",
+    phone: "343534",
+    accepted: true,
+  },
+  {
+    id: 5,
+    name: "Dr. Antonio",
+    email: "antonio_doctor@gmail.com",
+    password: "antonio",
+    role: "doctor",
+    speciality: "Hematologia",
+    phone: "343534",
+    accepted: false,
+  },
+  //** pacientes */
+  {
+    id: 6,
+    name: "Luciano Tales",
+    email: "luciano_tales@gmail.com",
+    password: "luciano",
+    role: "paciente",
+    phone: "343534",
+    accepted: true,
+  },
+  {
+    id: 7,
+    name: "Ricardo Orellana",
+    email: "ricardo@gmail.com",
+    password: "ricardo",
+    role: "paciente",
+    phone: "343534343",
+    accepted: false,
+  },
+  {
+    id: 8,
+    name: "Esteban",
+    email: "esteban@gmail.com",
+    password: "esteban",
+    role: "paciente",
+    phone: "343533434",
+    accepted: true,
+  },
+];
+
+export default usuariosDefecto;

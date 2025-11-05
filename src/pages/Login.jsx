@@ -20,24 +20,27 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = formData;
-    const usersLocal = localStorage.getItem("users");
-    const users = usersLocal ? JSON.parse(usersLocal) : [];
-    const userFind = users.find((user) => {
-      return user.email.toLowerCase() === form.email.toLowerCase();
+    const usuariosStorage = localStorage.getItem("usuarios");
+    const usuarios = usuariosStorage ? JSON.parse(usuariosStorage) : [];
+    const usuarioBuscado = usuarios.find((usuario) => {
+      return usuario.email.toLowerCase() === form.email.toLowerCase();
     });
-    if (userFind) {
-      if (userFind.password == form.password) {
-        if (!userFind.accepted) {
+    if (usuarioBuscado) {
+      if (usuarioBuscado.password == form.password) {
+        if (!usuarioBuscado.accepted) {
           toast.error("Su registro aún no fué aprobado.");
           return;
         }
-        toast.success(`Bienvenido ${userFind.name}`);
-        setUser(userFind);
-        localStorage.setItem("usuario-logueado",JSON.stringify(userFind))
-        if (userFind.role == "admin") {
+        toast.success(`Bienvenido ${usuarioBuscado.name}`);
+        setUser(usuarioBuscado);
+        localStorage.setItem(
+          "usuario-logueado",
+          JSON.stringify(usuarioBuscado)
+        );
+        if (usuarioBuscado.role == "admin") {
           setIsAdmin(true);
           navigate("/admin-dashboard");
-        } else if (userFind.role == "doctor") {
+        } else if (usuarioBuscado.role == "doctor") {
           setIsDoctor(true);
           navigate("/doctor-dashboard");
         } else {

@@ -1,0 +1,40 @@
+const turnosDefecto = [
+  {
+    id: 1,
+    paciente_id: 6,
+    doctor_id: 2,
+    nombre_paciente: "Luciano Tales",
+    nombre_doctor: "Dr. Hugo",
+    especialidad: "Cardiologia",
+    estado: "pendiente",
+    fecha: "2025-11-20",
+    hora: "18:00",
+    sintomas: "Me duele el cora",
+  },
+  {
+    id: 2,
+    paciente_id: 6,
+    doctor_id: 2,
+    nombre_paciente: "Luciano Tales",
+    nombre_doctor: "Dr. Hugo",
+    especialidad: "Cardiologia",
+    estado: "aprobado",
+    fecha: "2025-11-25",
+    hora: "12:00",
+    sintomas: "me duele el pecho",
+  },
+  {
+    id: 3,
+    paciente_id: 8,
+    doctor_id: 2,
+    nombre_paciente: "Esteban",
+    nombre_doctor: "Dr. Hugo",
+    especialidad: "Cardiologia",
+    estado: "rechazado",
+    fecha: "2025-11-28",
+    hora: "09:00",
+    sintomas: "",
+  },
+];
+
+export default turnosDefecto;

@@ -24,21 +24,22 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = { ...formData };
-    const usersLocal = localStorage.getItem("users");
-    const users = usersLocal ? JSON.parse(usersLocal) : [];
-    const userExist = users.find((user) => {
-      return user.email.toLowerCase() === form.email.toLowerCase();
+    const usuariosStorage = localStorage.getItem("usuarios");
+    const usuarios = usuariosStorage ? JSON.parse(usuariosStorage) : [];
+    const usuarioExiste = usuarios.find((usuario) => {
+      return usuario.email.toLowerCase() === form.email.toLowerCase();
     });
-    if (userExist) {
+    if (usuarioExiste) {
       toast.error("El email ya se encuentra registrado.");
       return;
     }
     if (form.role == "paciente") {
       delete form.speciality;
     }
-    form.id = users.length + 1;
-    users.push(form);
-    localStorage.setItem("users", JSON.stringify(users));
+    form.id = usuarios.length + 1;
+    form.email = form.email.toLowerCase(); // forzando a minusculas
+    usuarios.push(form);
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
     toast.success("Fué registrado correctamente, espere a ser aprobado.");
     navigate("/");
   };
@@ -97,7 +98,9 @@ const Signup = () => {
             onChange={handleChange}
             className="bg-transparent text-gray-800 placeholder-gray-800 outline-none text-sm w-full h-full"
           >
-            <option selected value="paciente">Paciente</option>
+            <option selected value="paciente">
+              Paciente
+            </option>
             <option value="doctor">Doctor</option>
           </select>
         </div>

@@ -88,7 +88,7 @@ const Navbar = () => {
                     onClick={handleLogout}
                     className="px-4 py-2 hover:bg-gray-100 rounded cursor-pointer text-red-500"
                   >
-                    Logout
+                    Cerrar sesión
                   </li>
                 </ul>
               </div>
@@ -98,7 +98,7 @@ const Navbar = () => {
               onClick={() => navigate("/login")}
               className="bg-secondary text-white cursor-pointer py-2 px-8 hover:bg-primary duration-300 transition-all rounded-lg"
             >
-              Login
+              Iniciar sesión
             </button>
           )}
         </div>
@@ -146,24 +146,26 @@ const Navbar = () => {
                    z-50 inline-block"
                 >
                   <ul className="flex flex-col p-2 text-gray-700">
-                    <li
-                      onClick={() => navigate("/profile")}
-                      className="px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
-                    >
-                      Perfil
-                    </li>
-
-                    <li
-                      onClick={() => navigate("/my-appointments")}
-                      className="px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
-                    >
-                      Mis Turnos
-                    </li>
+                    {!isAdmin ? (
+                      <li
+                        onClick={() => navigate("/turnos")}
+                        className="px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
+                      >
+                        Mis Turnos
+                      </li>
+                    ) : (
+                      <li
+                        onClick={() => navigate("/admin-dashboard")}
+                        className="px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
+                      >
+                        Ver usuarios
+                      </li>
+                    )}
                     <li
                       onClick={handleLogout}
                       className="px-4 py-2 hover:bg-gray-100 rounded cursor-pointer text-red-500"
                     >
-                      Logout
+                      Cerrar sesión
                     </li>
                   </ul>
                 </div>
@@ -173,7 +175,7 @@ const Navbar = () => {
                 onClick={() => navigate("/login")}
                 className="bg-secondary text-white cursor-pointer py-2 px-8 hover:bg-primary duration-300 transition-all rounded-lg"
               >
-                Login
+                Iniciar sesión
               </button>
             )}
           </div>

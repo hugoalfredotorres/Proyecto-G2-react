@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { navigate, setUser, loading, setIsDoctor, setIsPaciente, setIsAdmin } =
+  const { navigate, setUser, setIsDoctor, setIsPaciente, setIsAdmin } =
     useContext(AppContext);
 
   const [formData, setFormData] = useState({
@@ -61,7 +61,9 @@ const Login = () => {
         onSubmit={handleSubmit}
         className="max-w-96 w-full mx-auto  text-center border border-gray-300/60 rounded-2xl px-8 bg-primary"
       >
-        <h1 className="text-white text-3xl mt-10 font-medium">Login</h1>
+        <h1 className="text-white text-3xl mt-10 font-medium">
+          Iniciar sesión
+        </h1>
         <p className="text-white text-sm mt-2">Inicie sesión para continuar</p>
         <div className="flex items-center w-full mt-10 bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
           <MailIcon />
@@ -84,16 +86,17 @@ const Login = () => {
             value={formData.password}
             onChange={handleChange}
             className="bg-transparent text-gray-800 placeholder-gray-800 outline-none text-sm w-full h-full"
-            placeholder="Password"
+            placeholder="Contraseña"
             required
           />
         </div>
 
         <button
           type="submit"
-          className="mt-4 w-full h-11 rounded-full text-white bg-secondary  cursor-pointer hover:opacity-90 transition-opacity"
+          className="mt-4 w-full h-11 rounded-full text-white bg-secondary disabled:opacity-80  cursor-pointer hover:opacity-90 transition-opacity"
+          disabled={!formData.email || !formData.password}
         >
-          {loading ? "please wait..." : "Login"}
+          Iniciar sesion
         </button>
         <p className="py-4 text-white">
           ¿No tienes una cuenta?

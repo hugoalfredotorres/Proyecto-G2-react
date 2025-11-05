@@ -5,7 +5,7 @@ import { Grid3X3, LayoutDashboard, Menu, User2Icon, X } from "lucide-react";
 import toast from "react-hot-toast";
 
 const Layout = () => {
-  const { setIsDoctor, navigate } = useContext(AppContext);
+  const { user, setUser, setIsDoctor, navigate } = useContext(AppContext);
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -25,6 +25,7 @@ const Layout = () => {
     return location.pathname === path;
   };
   const logout = async () => {
+    setUser(null);
     setIsDoctor(false);
     localStorage.removeItem("usuario-logueado");
     toast.success(`Hasta pronto ${user.name}`);
@@ -87,8 +88,8 @@ const Layout = () => {
             <div className="flex items-center text-sm text-gray-500">
               <div className="w-8 h-8 bg-gray-300 rounded-full mr-3"></div>
               <div>
-                <div className="font-medium text-gray-900">Doctor User</div>
-                <div>doctor@example.com</div>
+                <div className="font-medium text-gray-900">{user.name}</div>
+                <div>{user.email}</div>
               </div>
             </div>
           </div>
@@ -119,7 +120,7 @@ const Layout = () => {
                   onClick={logout}
                   className="cursor-pointer hover:underline text-red-500 text-lg font-semibold"
                 >
-                  Logout
+                  Salir
                 </p>
               </div>
             </div>

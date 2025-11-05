@@ -11,7 +11,10 @@ const Turnos = () => {
     const turnosStorage = localStorage.getItem("turnos");
     if (turnosStorage) {
       const turnos = JSON.parse(turnosStorage);
-      setTurnos(turnos);
+      const turnosDelPaciente = turnos.filter(
+        (turno) => turno.paciente_id == user.id
+      );
+      setTurnos(turnosDelPaciente);
     }
     const usuariosStorage = localStorage.getItem("usuarios");
     if (usuariosStorage) {

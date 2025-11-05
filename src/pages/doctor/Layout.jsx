@@ -12,14 +12,9 @@ const Layout = () => {
   const menuItems = [
     {
       path: "/doctor-dashboard",
-      name: "Dashboard",
+      name: "Lista de turnos",
       icon: LayoutDashboard,
       exact: true,
-    },
-    {
-      path: "/doctor-dashboard/appointments",
-      name: "Appointments",
-      icon: Grid3X3,
     },
   ];
 
@@ -32,7 +27,7 @@ const Layout = () => {
   const logout = async () => {
     setIsDoctor(false);
     localStorage.removeItem("usuario-logueado");
-    toast.success("Logged out successfully");
+    toast.success(`Hasta pronto ${user.name}`);
     navigate("/");
   };
   return (

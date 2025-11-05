@@ -3,23 +3,18 @@ import Home from "./pages/Home";
 import Doctors from "./pages/Doctors";
 import DoctorDetails from "./pages/DoctorDetails";
 import Services from "./pages/Services";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import MyAppointments from "./pages/MyAppointments";
-import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Layout from "./pages/doctor/Layout";
 import Dashboard from "./pages/doctor/Dashboard";
-import Appointments from "./pages/doctor/Appointments";
-import MyProfile from "./pages/doctor/MyProfile";
 import { Toaster } from "react-hot-toast";
 import { useContext, useEffect } from "react";
 import { AppContext } from "./context/AppContext";
 import usersDefecto from "./constants/users_defaults";
 import DashAdmin from "./pages/dash_admin/dash_admin";
+import Turnos from "./pages/turnos";
 
 const App = () => {
   const {
@@ -47,7 +42,6 @@ const App = () => {
         navigate("/doctor-dashboard");
       } else {
         setIsPaciente(true);
-        navigate("/");
       }
     }
   };
@@ -70,11 +64,9 @@ const App = () => {
         <Route path="/doctors" element={<Doctors />} />
         <Route path="/doctor-details/:id" element={<DoctorDetails />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/my-appointments" element={<MyAppointments />} />
+        <Route path="/turnos" element={<Turnos />} />
 
         {/* Doctor Routes */}
         <Route
@@ -82,10 +74,6 @@ const App = () => {
           element={isDoctor ? <Layout /> : <Login />}
         >
           <Route index element={isDoctor ? <Dashboard /> : <Login />} />
-          <Route
-            path="appointments"
-            element={isDoctor ? <Appointments /> : <Login />}
-          />
         </Route>
 
         {/* Admin Routes */}

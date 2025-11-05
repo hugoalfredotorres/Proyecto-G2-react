@@ -71,7 +71,7 @@ const Navbar = () => {
                 <ul className="flex flex-col p-2 text-gray-700">
                   {!isAdmin ? (
                     <li
-                      onClick={() => navigate("/my-appointments")}
+                      onClick={() => navigate("/turnos")}
                       className="px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
                     >
                       Mis Turnos
